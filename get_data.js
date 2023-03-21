@@ -1,4 +1,3 @@
-//const apiKey = 'c657e60596c700834193677b83977182';
 const myUrl1 = new URL(window.location.toLocaleString());
 const myUrl2 = new URL(myUrl1);
 const user = myUrl2.searchParams.get('u');
