@@ -9,8 +9,9 @@ It has three main views: album art with song details, artist bio with an option 
 
 # Known Issues
 * On some streamings platforms (i.e.: Tidal), artists get lumped together when there are more than one on a track. This can cause issue when finding the correct info. 
-* The link to Genius might break, depending on the the formatting of the song title. 
+* The link to Genius might break, depending on the the formatting of the song title. Google search is usually faster anyway.
 * For classic albums you might get some very old cover art, or coverartarchive may struggle to find the currect art.
+* It can take some time to get the cover art from coverartarchive.org. As a workaround, I first get a smaller image and then the big one. This is only an issue when you switch albums of course. In the background, I also fetch the last.fm image, but it is quite low res.
 
 # Screenshots
 ## Just the album
@@ -21,4 +22,4 @@ It has three main views: album art with song details, artist bio with an option 
 
 ## Full artist bio
 ![Full artist bio](https://github.com/peterdconradie/dash.fm/blob/main/screens/full_bio.png)
- 
+
