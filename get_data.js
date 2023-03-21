@@ -220,7 +220,7 @@ function expandFooter() {
 }
 
 function collapseFooter() {
-    document.getElementById("footer").style.height = "20px";
+    document.getElementById("footer").style.height = "0px";
 }
 
 /* Fullscreen */

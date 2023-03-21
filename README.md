@@ -13,9 +13,12 @@ It has three main views: album art with song details, artist bio with an option 
 * For classic albums you might get some very old cover art, or coverartarchive may struggle to find the currect art.
 
 # Screenshots
+## Just the album
 ![No detail](https://github.com/peterdconradie/dash.fm/blob/main/screens/no_detail_view.png)
 
+## More info
 ![Detail](https://github.com/peterdconradie/dash.fm/blob/main/screens/detail_view.png)
 
+## Full artist bio
 ![Full artist bio](https://github.com/peterdconradie/dash.fm/blob/main/screens/full_bio.png)
  
