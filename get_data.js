@@ -105,17 +105,31 @@ function updateNowPlaying() {
         .then(response => response.json())
         .then(data => {
             const track = data.recenttracks.track[0];
-            const artist = track.artist['#text'];
+            let artist = track.artist['#text'];
             const album = track.album['#text'];
             const songName = track.name;
 
-            // Truncate artist name after ","
-            const truncatedArtist = artist.split(',')[0];
+            // this is the tyler function, but it works for all artists: it truncates afer the comma. Right now, I have only found Tyler, the Creator with a comma in the name.
+            function truncateString(str) {
+            let parts = str.split(",");
+              if (parts[0] === "Tyler" && parts[1] === " the Creator") {
+                return `${parts[0]},${parts[1]}`;
+              } else {
+                return parts[0];
+              }
+            }    
+        
+        
+        
+            let truncatedArtist = truncateString(artist);
+    
+            console.log(`Fixed Artist: ${truncatedArtist}`);
+
 
             // Truncate album name after " ("
+            // this will probably not work everywhere for every instance
             const truncatedAlbum = album.split(' (')[0];
 
-            console.log(`Fixed Artist: ${truncatedArtist}`);
             console.log(`Fixed Album: ${truncatedAlbum}`);
 
             const encodedArtist = encodeURIComponent(truncatedArtist);
@@ -220,7 +234,7 @@ function expandFooter() {
 }
 
 function collapseFooter() {
-    document.getElementById("footer").style.height = "0px";
+    document.getElementById("footer").style.height = "20px";
 }
 
 /* Fullscreen */
