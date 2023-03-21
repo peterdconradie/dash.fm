@@ -1,15 +1,14 @@
-# dash.fm
-Now playing dashboard for last.fm
+# dash.fm: a now playing dashboard for last.fm
+This dashboard displays album art and information about the artist currently playing, fetched from the last.fm API. It can run without a server or easily be deployed to a site using https://www.w3schools.com/spaces/. 
 
-This is an html / javascript dashboard that can be used to display album art and information about your currently playing artist. It should run without a server, but you can also deploy it to somewhere like https://www.w3schools.com/spaces/. 
+# Setup
+Setup involves obtaining a last.fm API key and inserting it into the key.js file. The dashboard can display your own or another user’s information by changing the URL: index.html?u=RJ, where RJ is the name of the user. 
 
-Setup is simple: Get a last.fm api key, following these instructions; https://www.last.fm/api/authentication
-Edit the key.js file and insert your api key. It is a string with characters and numbers.
+It has three main views: album art with song details, artist bio with an option for full biography or full screen view, and images from the coverart archive. The dashboard’s accuracy depends on the correctness of your tags.
 
-To view your own, or someoneelse's now dashboard, just change the url (or append it with: index.html?u=RJ, where RJ is the name of the user. 
+![No detail](https://github.com/peterdconradie/dash.fm/blob/main/screens/no_detail_view.png)
 
-The dashboard has three main views: first, a simple abum art view, with song title, artist and album. If you hover, you'll get more detail, like the artist bio. Next to the artist bio, there is an option to view the full biography, or view the website in full screen. 
+![Detail](https://github.com/peterdconradie/dash.fm/blob/main/screens/detail_view.png)
 
-The images are taken from coverart archive and might load a little slow, so be patient. If you listen to an album, this not an issue. Older albums (i.e.: released before the streaming age) sometimes have very old album covers. New releases should work better. 
-
-The dashboard works only as good as your tags, so faulty tags will result in incorrect art or bios. 
+![Full artist bio](https://github.com/peterdconradie/dash.fm/blob/main/screens/full_bio.png)
+ 
