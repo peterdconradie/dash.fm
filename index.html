@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;400;700&display=swap" rel="stylesheet">
+  <script src="apikey.js"></script>
+  <script src="get_data.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title id="page_title">dash.fm</title>
+  </head>
+  <body>      
+
+    <div id="background"></div>
+    <div id="all_content">
+      <div id="centering">
+        <div class="parent">
+          <div id="albumArt">
+            <img src="album.png" id="album-art" alt="Album Art">
+          </div>
+          <div id="albumArt">
+            <img src="transparent.png" id="mb-album-art" alt="Album Art">
+          </div>
+        </div>
+        <div id="track_info_div">
+          <h1 id="track-info">Track information</h1>
+          <h2 id="artist-info">Artist information</h2>
+          <h3 id="album-info">Album information</h3>
+          <div class="fade">
+            <p id="artist-bio">Short artist bio from last.fm</p><h4><a id="fullscreen-button" href="#" onclick="expandFooter();"><i id="fullscreen-icon" class="material-icons settings-icon">open_in_full</i></a><a id="fullscreen-button" href="#" onclick="fullscreen();"><i id="fullscreen-icon" class="material-icons settings-icon">fullscreen</i></a></h4><br>
+
+                
+            <h4>
+              <i class="material-icons">event</i>
+            </h4>
+            <h4 id="release-date">Release date</h4>
+            <br>
+            <h4>
+              <i class="material-icons">label</i>
+            </h4>
+            <h4 id="artist-tags">Artist tags from Last.fm</h4>
+            <br>
+            <h4>
+              <i class="material-icons">auto_awesome</i>
+            </h4>
+            <h4 id="similar-artists">Similar artists from Last.fm tags</h4>
+            <br>
+            <h4>
+              <i class="material-icons">search</i>
+            </h4>
+            <h4>
+              <a id="aoty-link" href="" target="_blank">AOTY: Artist</a> | <a id="aoty-album-link" href="" target="_blank">AOTY: Album</a> | <a id="last_artist_link" href="" target="_blank">Last.fm: Artist</a> | <a id="last_album_link" href="" target="_blank">Last.fm: Album</a> | <a id="song-link" href="" target="_blank">Last.fm: Track</a>
+            </h4>
+            <br>
+            <h4>
+              <i class="material-icons">lyrics</i>
+            </h4>
+            <h4>
+              <a id="genius-lyrics-link" href="" target="_blank">Genius</a> | <a id="google-lyrics-search" href="" target="_blank">Google Search</a>
+              <h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+  
+  
+  <div id= "footerContent">
+    <a id="fullscreen-button" href="#" onclick="collapseFooter();"><i id="fullscreen-icon" class="material-icons">close</i></a>
+    <h3 id="artist-bio-name">Artist name here</h3> 
+     
+     
+    <p id="artist-bio-full">Short artist bio from last.fm</p>
+    </div>
+</div>
+  </body>
+</html>
