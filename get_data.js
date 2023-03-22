@@ -30,7 +30,7 @@ function updateNowPlaying() {
             if (truncatedSong.length > 49) {
                 truncatedTrackName += '...';
             }
-
+      
             console.log('getrecenttracks info: ', data);
             console.log('trackURLs info: ', trackUrl);
 
@@ -39,9 +39,8 @@ function updateNowPlaying() {
             document.querySelector('#artist-info').textContent = `${artist}`;
             // Update track information
             document.querySelector('#track-info').textContent = `${truncatedTrackName}`;
-
+            // insert page title
             document.querySelector('#page_title').textContent = `${truncatedTrackName} by ${artist}`;
-
             // Update album information
             document.querySelector('#album-info').textContent = `${album}`;
 

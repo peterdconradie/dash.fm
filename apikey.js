@@ -1,1 +1,1 @@
-var apiKey = 'insert your api key here, get it from last.fm';
+var apiKey = 'da4be1d8e505404ebd4fe101e1540746';
