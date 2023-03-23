@@ -178,7 +178,7 @@
 font-size:12px;
     
 }
-
+ 
 #albums li {
   display: flex;
   align-items: center;
@@ -189,7 +189,7 @@ font-size:12px;
     padding-bottom: 3px;
 }
  #footerContent {
-     width:80%;
+     width:85%;
      padding: 10px;
      padding-bottom:40px;
 }
@@ -198,6 +198,14 @@ font-size:12px;
     width:100%;
     float:left;
    
+}
+
+#wikipedia p {
+margin-top: 1em ;
+  margin-bottom: 1em ;
+}
+#wikipedia {
+    padding-bottom:40px;
 }
 
  #fullscreen-icon {

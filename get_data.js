@@ -138,7 +138,7 @@ function updateNowPlaying() {
             console.log(`Artist bio summary: ${artistBio}`);
             console.log('Artist info full: ${artistBioFull}', );
             document.querySelector('#artist-bio').innerHTML = artistBio;
-            document.querySelector('#artist-bio-full').innerHTML = formattedBio;
+           
             document.querySelector('#artist-bio-name').innerHTML = artistBioName;
             const tags = data.artist.tags.tag;
             let tagLinks = '';
@@ -173,12 +173,51 @@ function updateNowPlaying() {
                         const mbID = releaseGroup.id;
                         const lastfmURL = `https://www.last.fm/music/${encodeURIComponent(encodedArtist)}/${encodeURIComponent(title)}`;
                         const aotyURL = `https://www.albumoftheyear.org/search/albums/?q=${encodeURIComponent(title)}`;
-                        
                         const mbURL = `https://musicbrainz.org/release-group/${mbID}`;
-                       html += `<li><a href="${lastfmURL}" target="_blank"><img src="images/last.fm.png" alt="${title}" ></a> <a href="${mbURL}" target="_blank"><img src="images/mb.png" alt="${title}"><a href="${aotyURL}" target="_blank"><img src="images/aoty.png" alt="${title}"></a><span>${title} (${date})</span></li>`;
-                    });  
+                        html += `<li><a href="${lastfmURL}" target="_blank"><img src="images/last.fm.png" alt="${title}" ></a><a href="${aotyURL}" target="_blank"><img src="images/aoty.png" alt="${title}"></a><a href="${mbURL}" target="_blank"><img src="images/mb.png" alt="${title}"></a><span>${title} (${date})</span></li>`;
+                    });
                     html += '</ul>';
                     document.getElementById('albums').innerHTML = html;
+                    /// code pasted here
+                  
+                    
+                    const mbURLwiki = `https://musicbrainz.org/ws/2/artist/${mbArtistID}?inc=url-rels&fmt=json`;
+                    fetch(mbURLwiki).then(response => response.json()).then(data => {
+                        const relations = data.relations;
+                        const wikidataRelation = relations.find(relation => relation.type === 'wikidata');
+                        const wikidataURL = wikidataRelation.url.resource;
+                        const wikidataID = wikidataURL.split('/').pop();
+                        const wikipediaURL = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks&ids=${wikidataID}&sitefilter=enwiki&origin=*`;
+                        console.log('first wiki: ', wikipediaURL);
+                        
+                        
+                        return fetch(wikipediaURL);
+                    }).then(response => response.json()).then(data => {
+                        const entities = data.entities;
+                        const entity = entities[Object.keys(entities)[0]];
+                        const sitelinks = entity.sitelinks;
+                        const enwiki = sitelinks.enwiki;
+                        const title = enwiki.title;
+                        const wikipediaPageURL = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(title)}&origin=*`;
+                        
+                        const wikipediaPageURLdirect = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+                       console.log('direct link ', wikipediaPageURLdirect);
+                        
+                       // const formattedBio = artistBioFull.replace(/\n/g, '<br>');
+                        
+                        console.log('second wiki: ', wikipediaPageURL);
+                        return fetch(wikipediaPageURL);
+                    }).then(response => response.json()).then(data => {
+                        const pages = data.query.pages;
+                        const page = pages[Object.keys(pages)[0]];
+                        const  extract = page.extract;
+                       const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
+                        // const formattedExtract= extract;
+                        
+                        console.log('third wiki: ', formattedExtract);
+                        document.getElementById('wikipedia').innerHTML = formattedExtract;
+                    });
+                    // until here
                 });
             });
         });
