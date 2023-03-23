@@ -130,14 +130,14 @@ function updateNowPlaying() {
         // Fetch artist bio
         fetch(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtist}&api_key=${apiKey}&format=json`).then(response => response.json()).then(data => {
             let artistBio = data.artist.bio.summary;
-            const artistBioFull = data.artist.bio.content;
+            //const artistBioFull = data.artist.bio.content;
             const artistBioName = data.artist.name;
-            const formattedBio = artistBioFull.replace(/\n/g, '<br>');
+            //const formattedBio = artistBioFull.replace(/\n/g, '<br>');
             artistBio = artistBio.replace(/<a[^>]*>([^<]+)<\/a>/gi, '...');
             console.log('Artist info: ', data);
-            console.log(`Artist bio summary: ${artistBio}`);
+            //console.log(`Artist bio summary: ${artistBio}`);
             console.log('Artist info full: ${artistBioFull}', );
-            document.querySelector('#artist-bio').innerHTML = artistBio;
+            //document.querySelector('#artist-bio').innerHTML = artistBio;
            
             document.querySelector('#artist-bio-name').innerHTML = artistBioName;
             const tags = data.artist.tags.tag;
@@ -201,7 +201,9 @@ function updateNowPlaying() {
                         const wikipediaPageURL = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(title)}&origin=*`;
                         
                         const wikipediaPageURLdirect = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
-                       console.log('direct link ', wikipediaPageURLdirect);
+                        console.log('direct link ', wikipediaPageURLdirect);
+                        
+                        document.querySelector('#wiki-page-link').href = wikipediaPageURLdirect;
                         
                        // const formattedBio = artistBioFull.replace(/\n/g, '<br>');
                         
@@ -211,11 +213,19 @@ function updateNowPlaying() {
                         const pages = data.query.pages;
                         const page = pages[Object.keys(pages)[0]];
                         const  extract = page.extract;
-                       const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
+                        //const truncatedExtract = extract;
+                        
+                        let truncatedExtract = extract.split(" ").slice(0, 105).join(" ") + "...";
+                        //console.log(truncatedExtract);
+                        
+                        const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
                         // const formattedExtract= extract;
                         
-                        console.log('third wiki: ', formattedExtract);
+                        //console.log('third wiki: ', formattedExtract);
                         document.getElementById('wikipedia').innerHTML = formattedExtract;
+                        //document.getElementById('wikipedia').innerHTML = formattedExtract;
+                        document.querySelector('#artist-bio').innerHTML = truncatedExtract;    
+                                                
                     });
                     // until here
                 });
