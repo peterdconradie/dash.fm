@@ -24,56 +24,73 @@
                 <h1 id="track-info">Track information</h1>
                 <h2 id="artist-info">Artist information</h2>
                 <h3 id="album-info">Album information</h3>
+                
                 <div class="fade">
                     <p id="artist-bio">Short artist bio from last.fm</p>
-                    <h4><a id="fullscreen-button" href="#" onclick="expandFooter();"><i id="fullscreen-icon" class="material-icons settings-icon">open_in_full</i></a><a id="fullscreen-button" href="#" onclick="fullscreen();"><i id="fullscreen-icon" class="material-icons settings-icon">fullscreen</i></a></h4>
+                    <h5><a id="fullscreen-button" href="#" onclick="expandFooter();"><i id="fullscreen-icon" class="material-icons settings-icon">open_in_full</i></a><a id="fullscreen-button" href="#" onclick="fullscreen();"><i id="fullscreen-icon" class="material-icons settings-icon">fullscreen</i></a></h5>
                     <br>
-                    <h4>
+                    <h5>
               <i class="material-icons">event</i>
-            </h4>
-                    <h4 id="release-date">Release date</h4>
+            </h5>
+                    <h5 id="release-date">Release date</h5>
                     <br>
-                    <h4>
+                    <h5>
               <i class="material-icons">label</i>
-            </h4>
-                    <h4 id="artist-tags">Artist tags from Last.fm</h4>
+            </h5>
+                    <h5 id="artist-tags">Artist tags from Last.fm</h5>
                     <br>
-                    <h4>
+                    <h5>
               <i class="material-icons">auto_awesome</i>
-            </h4>
-                    <h4 id="similar-artists">Similar artists from Last.fm tags</h4>
+            </h5>
+                    <h5 id="similar-artists">Similar artists from Last.fm tags</h5>
                     <br>
-                    <h4>
+                    <h5>
               <i class="material-icons">search</i>
-            </h4>
-                    <h4>
+            </h5>
+                    <h5>
               <a id="aoty-link" href="" target="_blank">AOTY: Artist</a> | <a id="aoty-album-link" href="" target="_blank">AOTY: Album</a> | <a id="last_artist_link" href="" target="_blank">Last.fm: Artist</a> | <a id="last_album_link" href="" target="_blank">Last.fm: Album</a> | <a id="song-link" href="" target="_blank">Last.fm: Track</a>
-            </h4>
+            </h5>
                     <br>
-                    <h4>
+                    <h5>
               <i class="material-icons">lyrics</i>
-            </h4>
-                    <h4>
+            </h5>
+                    <h5>
               <a id="genius-lyrics-link" href="" target="_blank">Genius</a> | <a id="google-lyrics-search" href="" target="_blank">Google Search</a>
-              </h4> </div>
+              </h5> </div>
             </div>
         </div>
     </div>
     <div id="footer">
-        
-        <div id="footerContent"> 
-            <div id="top-bar">
-            <a id="fullscreen-button" href="#" onclick="collapseFooter();"><i id="fullscreen-icon" class="material-icons">close</i></a>
-            </div>    
-             <div id="extra-main">
-            <h2 id="artist-bio-name">Artist name here</h2>
-        
-            <div id="wikipedia"></div>
-                 <p><a id="wiki-page-link" href="" target="_blank">See full page on Wikipedia</a></p>
+        <div id="footerContent">
+            <div id="top-bar"> <a id="fullscreen-button" href="#" onclick="collapseFooter();"><i id="fullscreen-icon" class="material-icons">close</i></a> </div>
+            <div id="extra-main">
+                <h2 id="artist-bio-name">Artist name here</h2>
+                <div id="wikipedia"></div>
             </div>
             <div id="extra-side">
-                
-                <h3>Studio albums</h3> 
+                <h4>About</h4>
+                <p><b>Origin: </b></p>
+                <p id="artist-from">...</p>
+                <br>
+                <p><b>Area: </b></p>
+                <p id="artist-area">...</p>
+                <br>
+                <p><b>Since: </b></p>
+                <p id="artist-lifespan">...</p>
+                <br>
+                <p><b>Type: </b></p>
+                <p id="artist-type">...</p>
+                <br>
+                <h4>Relations</h4>
+                <div id=relations>
+                    
+                    <div id="relations-auto"></div>
+                    <div id="relations-manual">
+                        <a id="wiki-page-link" href="" target="_blank"><img src="images/wikipedia.png"></a>
+                        <a id="mb-artist-link" href="" target="_blank"><img src="images/mb.png"></a>
+                    </div>
+                </div>
+                <h4>Studio albums</h4>
                 <div id="albums"></div>
             </div>
         </div>
