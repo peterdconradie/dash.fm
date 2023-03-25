@@ -1,5 +1,5 @@
 # dash.fm: a now playing dashboard for last.fm
-This dashboard displays album art and information about the artist currently playing, fetched from the last.fm API. It can run without a server or easily be deployed to a site using https://www.w3schools.com/spaces/. 
+This dashboard displays album art and information about the artist and track currently playing on last.fm for a particular use. It fetches data from the last.fm API. It can run without a server or easily be deployed to a site using https://www.w3schools.com/spaces/. 
 
 ## Setup
 Setup involves obtaining a last.fm API key and inserting it into the key.js file. The dashboard can display your own or another user’s information by changing the URL: index.html?u=RJ, where RJ is the name of the user. 
