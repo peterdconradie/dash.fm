@@ -113,8 +113,9 @@ function updateNowPlaying() {
             document.querySelector('#artist-lifespan').textContent = `No information found on musicbrainz`;
             document.querySelector('#artist-type').textContent = `No information found on musicbrainz`;
             document.querySelector('#release-date').textContent = `No date found`;
-            // document.querySelector('#mb-album-art').src = albumArtUrl;
-            //document.querySelector('#mb-album-art').src = 'images/transparent.png'
+            document.querySelector('#mb-album-art').src = 'images/transparent.png'
+                // document.querySelector('#mb-album-art').src = albumArtUrl;
+                //document.querySelector('#mb-album-art').src = 'images/transparent.png'
             const mb_rg_url = `https://musicbrainz.org/ws/2/release-group/?query=artist:${encodedArtist} AND release:${truncatedAlbum} and title:${truncatedAlbum} &fmt=json`;
             //const mb_rg_url = `https://musicbrainz.org/ws/2/release/?query=artist:${encodedArtist} AND release:${truncatedAlbum}&fmt=json`;
             console.log(mb_rg_url);
@@ -210,17 +211,19 @@ function updateNowPlaying() {
                         // james blake doesn't work
                         //console.log('debug url:', mbURLwiki)
                         fetch(mbURLwiki).then(response => response.json()).then(data => {
-                            const relations = data.relations;
+                            let relations = data.relations;
                             const wikidataRelation = relations.find(relation => relation.type === 'wikidata');
                             const wikidataURL = wikidataRelation.url.resource;
                             const wikidataID = wikidataURL.split('/').pop();
                             const wikipediaURL = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks&ids=${wikidataID}&sitefilter=enwiki&origin=*`;
-                            // relationships sandbox start here 
-                            const urls = relations.filter(relation => ['last.fm', 'allmusic', 'discogs'].includes(relation.type)).map(relation => ({
+                            // this removes all the entries from the relations array with an empty source-credit (i.e.: all aliases are removed)
+                            let filteredRelations = data.relations.filter(relation => !relation['source-credit']);
+                            console.log('filteredRelations urls: ', filteredRelations);
+                            const urls = filteredRelations.filter(relation => ['last.fm', 'allmusic', 'discogs'].includes(relation.type)).map(relation => ({
                                 url: relation.url.resource
                                 , type: relation.type
                             }));
-                            //console.log('relations urls: ', data);
+                            console.log('relations urls: ', data);
                             const relationsDiv = document.getElementById('relations-auto');
                             relationsDiv.innerHTML = '';
                             urls.forEach(url => {
