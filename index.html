@@ -13,21 +13,56 @@
 </head>
 
 <body>
+    <div id="side-bar">
+        <div class="content">
+            <div id="extra-main-header">
+                <h2 id="artist-bio-name">Artist name here</h2> </div>
+            <div id="extra-main">
+                <div id="wikipedia"></div>
+            </div>
+            <div id="extra-side">
+                <h4>About</h4>
+                <p><b>Origin: </b></p>
+                <p id="artist-from">...</p>
+                <br>
+                <p><b>Area: </b></p>
+                <p id="artist-area">...</p>
+                <br>
+                <p><b>Since: </b></p>
+                <p id="artist-lifespan">...</p>
+                <br>
+                <p><b>Type: </b></p>
+                <p id="artist-type">...</p>
+                <br>
+                <h4>Relations</h4>
+                <div id=relations>
+                    <div id="relations-auto"></div>
+                    <div id="relations-manual">
+                        <a id="wiki-page-link" href="" target="_blank"><img src="images/wikipedia.png"></a>
+                        <a id="mb-artist-link" href="" target="_blank"><img src="images/mb.png"></a>
+                        <a id="aoty-artist-link" href="" target="_blank"><img src="images/aoty.png"></a>
+                    </div>
+                </div>
+                <h4>Studio albums</h4>
+                <div id="albums"></div>
+            </div>
+        </div>
+    </div>
     <div id="background"></div>
     <div id="all_content">
         <div id="centering">
-            <div class="parent">
-                <div id="albumArt"> <img src="images/album.png" id="album-art" alt="Album Art"> </div>
-                <div id="albumArt"> <img src="images/transparent.png" id="mb-album-art" alt="Album Art"> </div>
+            <div class="cover-info">
+                <div class="lastfmcover"><img src="images/transparent.png" id="last-album-art" alt="Album Art"></div>
+                <div class="mbcover"><img src="images/transparent.png" id="mb-album-art" alt="Album Art"></div>
             </div>
             <div id="track_info_div">
                 <h1 id="track-info">Track information</h1>
                 <h2 id="artist-info">Artist information</h2>
                 <h3 id="album-info">Album information</h3>
-                
                 <div class="fade">
-                    <p id="artist-bio">Short artist bio from last.fm</p>
-                    <h5><a id="fullscreen-button" href="#" onclick="expandFooter();"><i id="fullscreen-icon" class="material-icons settings-icon">open_in_full</i></a><a id="fullscreen-button" href="#" onclick="fullscreen();"><i id="fullscreen-icon" class="material-icons settings-icon">fullscreen</i></a></h5>
+                    <p id="artist-bio">Short artist bio wikipedia</p>
+                    <h5><a id="fullscreen-button" href="#" onclick="fullscreen();"><i id="fullscreen-icon" class="material-icons settings-icon">fullscreen</i></a></h5>
+                    <!--code for the full screen, not used anymore <a id="fullscreen-button" href="#" onclick="expandFooter();"><i id="fullscreen-icon" class="material-icons settings-icon">open_in_full</i></a> -->
                     <br>
                     <h5>
               <i class="material-icons">event</i>
@@ -63,36 +98,6 @@
     <div id="footer">
         <div id="footerContent">
             <div id="top-bar"> <a id="fullscreen-button" href="#" onclick="collapseFooter();"><i id="fullscreen-icon" class="material-icons">close</i></a> </div>
-            <div id="extra-main">
-                <h2 id="artist-bio-name">Artist name here</h2>
-                <div id="wikipedia"></div>
-            </div>
-            <div id="extra-side">
-                <h4>About</h4>
-                <p><b>Origin: </b></p>
-                <p id="artist-from">...</p>
-                <br>
-                <p><b>Area: </b></p>
-                <p id="artist-area">...</p>
-                <br>
-                <p><b>Since: </b></p>
-                <p id="artist-lifespan">...</p>
-                <br>
-                <p><b>Type: </b></p>
-                <p id="artist-type">...</p>
-                <br>
-                <h4>Relations</h4>
-                <div id=relations>
-                    
-                    <div id="relations-auto"></div>
-                    <div id="relations-manual">
-                        <a id="wiki-page-link" href="" target="_blank"><img src="images/wikipedia.png"></a>
-                        <a id="mb-artist-link" href="" target="_blank"><img src="images/mb.png"></a>
-                    </div>
-                </div>
-                <h4>Studio albums</h4>
-                <div id="albums"></div>
-            </div>
         </div>
     </div>
 </body>

@@ -15,9 +15,8 @@ function updateNowPlaying() {
         const mbid = track.mbid;
         const album_mbid = track.album.mbid;
         const trackUrl = track.url
-        // we save the track infor in currentTrack, so it can be checked later
-        
-        // let truncatedArtist = artist.split(',')[0];
+            // we save the track infor in currentTrack, so it can be checked later
+            // let truncatedArtist = artist.split(',')[0];
         const truncatedSong = song.split(' (')[0];
         const albumTrunc = album.split(' (')[0];
         const artistTrunc = artist.split(',')[0];
@@ -37,7 +36,9 @@ function updateNowPlaying() {
         document.querySelector('#page_title').textContent = `${truncatedTrackName} by ${artist}`;
         // Update album information
         document.querySelector('#album-info').textContent = `${album}`;
-        document.querySelector('#album-art').src = albumArtUrl;
+        //document.querySelector('#album-art').src = albumArtUrl;
+        //coverart first from last.fm
+        document.querySelector('#last-album-art').src = albumArtUrl;
         // document.getElementById('mbid').textContent = `MBID: ${mbid}`;
         // document.getElementById('album_mbid').textContent = `MBID: ${album_mbid}`;
         const page_title = `https://www.albumoftheyear.org/search/?q=${encodeURIComponent(artist)}`;
@@ -84,9 +85,6 @@ function updateNowPlaying() {
         const songName = track.name;
         const currentTrack = track.name;
         //console.log('currentTrack for if statemt : ', currentTrack);
-
-        
-        
         // this is the tyler function, but it works for all artists: it truncates afer the comma. Right now, I have only found Tyler, the Creator with a comma in the name.
         function truncateString(str) {
             let parts = str.split(",");
@@ -105,29 +103,33 @@ function updateNowPlaying() {
         //console.log(`Fixed Album: ${truncatedAlbum}`);
         const encodedArtist = encodeURIComponent(truncatedArtist);
         // Fetch release group
-        
-        
         if (currentTrack !== lastPlayedTrack) {
+            // trying populating with defaults here
+            document.getElementById('wikipedia').innerHTML = '<p>No information found on wikipedia</p>';
+            document.getElementById('artist-bio').innerHTML = '<p>No information found on wikipedia</p>';
+            document.getElementById('albums').innerHTML = '<p>No albums found in musicbrainz</p>';
+            document.querySelector('#artist-from').textContent = `No information found on musicbrainz`;
+            document.querySelector('#artist-area').textContent = `No information found on musicbrainz`;
+            document.querySelector('#artist-lifespan').textContent = `No information found on musicbrainz`;
+            document.querySelector('#artist-type').textContent = `No information found on musicbrainz`;
+            document.querySelector('#release-date').textContent = `No date found`;
+            // document.querySelector('#mb-album-art').src = albumArtUrl;
+            //document.querySelector('#mb-album-art').src = 'images/transparent.png'
             const mb_rg_url = `https://musicbrainz.org/ws/2/release-group/?query=artist:${encodedArtist} AND release:${truncatedAlbum} and title:${truncatedAlbum} &fmt=json`;
             //const mb_rg_url = `https://musicbrainz.org/ws/2/release/?query=artist:${encodedArtist} AND release:${truncatedAlbum}&fmt=json`;
             console.log(mb_rg_url);
             fetch(mb_rg_url).then(response => response.json()).then(data => {
                 console.log('rg data from mb', data);
-                const testObject = data; 
+                const testObject = data;
                 console.log('test data from mb', testObject);
-                
                 let filteredReleaseGroups = [];
-for (let i = 0; i < testObject.length; i++) {
-    if (testObject[i].title === truncatedAlbum) {
-        filteredReleaseGroups.push(releaseGroups[i]);
-    }
-}
-                
-          console.log('test data from mb', filteredReleaseGroups);       
-                
-                
+                for (let i = 0; i < testObject.length; i++) {
+                    if (testObject[i].title === truncatedAlbum) {
+                        filteredReleaseGroups.push(releaseGroups[i]);
+                    }
+                }
+                console.log('test data from mb', filteredReleaseGroups);
                 //console.log('filtered', filteredReleaseGroups);
-                
                 const releaseGroupId = data['release-groups'][0].id;
                 const releaseDate = data["release-groups"][0]["first-release-date"]
                 const releaseType = data["release-groups"][0]["primary-type"]
@@ -218,7 +220,7 @@ for (let i = 0; i < testObject.length; i++) {
                                 url: relation.url.resource
                                 , type: relation.type
                             }));
-                             //console.log('relations urls: ', data);
+                            //console.log('relations urls: ', data);
                             const relationsDiv = document.getElementById('relations-auto');
                             relationsDiv.innerHTML = '';
                             urls.forEach(url => {
@@ -228,7 +230,7 @@ for (let i = 0; i < testObject.length; i++) {
                                 a.href = url.url;
                                 a.target = '_blank';
                                 a.appendChild(img);
-                                relationsDiv.appendChild(a);    
+                                relationsDiv.appendChild(a);
                             });
                             // relationships end here
                             //console.log('first wiki: ', wikipediaURL);
@@ -245,15 +247,11 @@ for (let i = 0; i < testObject.length; i++) {
                             document.querySelector('#artist-lifespan').textContent = `${artistLifespan}`;
                             document.querySelector('#artist-type').textContent = `${artistType}`;
                             document.getElementById("last_artist_link").href = lastArtistUrl;
-                            
-                            
                             const musicBrainzArtistLink = `https://musicbrainz.org/artist/${encodeURIComponent(mbArtistID)}`;
                             //console.log('artist id link for link ', musicBrainzArtistLink);
                             document.querySelector('#mb-artist-link').href = musicBrainzArtistLink;
-                            
-                            
-                            
-                            
+                            const aotyArtistSearch = `https://www.albumoftheyear.org/search/artists/?q=${encodeURIComponent(artistBioName)}`;
+                            document.querySelector('#aoty-artist-link').href = aotyArtistSearch;
                             /// go on to grab the wikipdia data
                             return fetch(wikipediaURL);
                         }).then(response => response.json()).then(data => {
@@ -291,7 +289,15 @@ for (let i = 0; i < testObject.length; i++) {
             lastPlayedTrack = currentTrack;
         } /// this is the end bracket for the if statement 
     }); // these are the final brackets for the first fetch (get new playing onfo) requests
-} /// now playing function ends here 
+}
+/// now playing function ends here 
+var pageHeight = document.documentElement.scrollHeight;
+console.log(pageHeight);
+window.onload = function () {
+    var pageHeight = document.documentElement.scrollHeight;
+    document.querySelector('#side-bar .content').style.height = pageHeight + 'px';
+}
+
 function expandFooter() {
     document.getElementById("footer").style.height = "100%";
 }
@@ -348,4 +354,4 @@ function fullscreen() {
     }
 }
 // Update the now playing information every 3 seconds
-setInterval(updateNowPlaying, 3000);
+setInterval(updateNowPlaying, 2000);
