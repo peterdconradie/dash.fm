@@ -36,6 +36,7 @@ function updateNowPlaying() {
         document.querySelector('#page_title').textContent = `${truncatedTrackName} by ${artist}`;
         // Update album information
         document.querySelector('#album-info').textContent = `${album}`;
+        document.querySelector('#album-info-wiki').textContent = `${album}`;
         //document.querySelector('#album-art').src = albumArtUrl;
         //coverart first from last.fm
         document.querySelector('#last-album-art').src = albumArtUrl;
@@ -116,6 +117,29 @@ function updateNowPlaying() {
             document.querySelector('#mb-album-art').src = 'images/transparent.png'
                 // document.querySelector('#mb-album-art').src = albumArtUrl;
                 //document.querySelector('#mb-album-art').src = 'images/transparent.png'
+                // artist works 
+            fetch(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=${encodeURIComponent(truncatedArtist)}`).then(response => response.json()).then(data => {
+                // 2. Get the artist ID
+                const artistId = data.data[0].id;
+                const artistImage = data.data[0].picture_big;
+                console.log(`Artist Image: ${artistImage}`);
+                document.querySelector('#artist-image').src = artistImage;
+            });
+            // end sanbox
+            /// deezer sandbox here 
+            //var truncatedAlbumDeezer = truncatedAlbum.substring(0, 40);
+            let truncatedAlbumDeezer = truncatedAlbum.split(" ").slice(0, 7).join(" ");
+            //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
+            console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer)
+            const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
+            console.log('deezerAlbumSearch', deezerAlbumSearch)
+            fetch(deezerAlbumSearch).then(response => response.json()).then(data => {
+                console.log('deezerAlbumSearch', data)
+                console.log('deezerAlbumSearch', deezerAlbumSearch)
+                const albumImage = data.data[0].cover_xl;
+                console.log(`album Image from deezer: ${albumImage}`);
+                document.querySelector('#mb-album-art').src = albumImage;
+            });
             const mb_rg_url = `https://musicbrainz.org/ws/2/release-group/?query=artist:${encodedArtist} AND release:${truncatedAlbum} and title:${truncatedAlbum} &fmt=json`;
             //const mb_rg_url = `https://musicbrainz.org/ws/2/release/?query=artist:${encodedArtist} AND release:${truncatedAlbum}&fmt=json`;
             console.log(mb_rg_url);
@@ -129,33 +153,57 @@ function updateNowPlaying() {
                         filteredReleaseGroups.push(releaseGroups[i]);
                     }
                 }
-                console.log('test data from mb', filteredReleaseGroups);
                 //console.log('filtered', filteredReleaseGroups);
                 const releaseGroupId = data['release-groups'][0].id;
+                const releaseID = data["release-groups"][0].releases[0].id
                 const releaseDate = data["release-groups"][0]["first-release-date"]
                 const releaseType = data["release-groups"][0]["primary-type"]
                 document.querySelector('#release-date').textContent = `${releaseDate}`;
                 //                    document.querySelector('#release-type').textContent = `${releaseType}`;
-                //console.log('rg data from mb', data);
-                // Fetch cover art
-                const ca_ar_url = `https://coverartarchive.org/release-group/${releaseGroupId}`;
-                //console.log(ca_ar_url);
-                fetch(ca_ar_url).then(response => response.json()).then(data => {
-                    //const coverArtUrl = data.images[0].thumbnails.large;
-                    const coverArtUrl = data.images[0].image
-                    const coverArtUrls = data.images[0].thumbnails.small;
-                    //const coverArtUrls ="transparent.png";
-                    console.log('cover art: ', data);
-                    console.log(`Cover art: ${coverArtUrl}`);
-                    document.querySelector('#mb-album-art').src = coverArtUrls;
-                    document.querySelector('#mb-album-art').src = coverArtUrl;
-                    //    document.body.style.backgroundImage = `url(${coverArtUrl})`;
-                    // Set the background image of the background element
-                    ///document.querySelector('#background').style.backgroundImage = `url(${coverArtUrl})`;
-                    // Apply a blur filter to the background element
-                    //document.querySelector('#background').style.filter = 'blur(10px) grayscale(100%)';
-                });
-            });
+                //https://musicbrainz.org/ws/2/release-group/${releaseGroupID}?inc=aliases+artist-credits+releases+url-rels&fmt=json
+                const mbUrl = `https://musicbrainz.org/ws/2/release-group/${releaseGroupId}?inc=aliases+artist-credits+releases+url-rels&fmt=json`;
+                console.log('mbUrl for wiki album ', mbUrl)
+                    // wiki sandbox ends here
+                fetch(mbUrl).then(response => response.json()).then(data => {
+                    let relations = data.relations;
+                    // search for wikidata here
+                    const filtered = relations.find(relation => relation.type === 'wikidata');
+                    console.log('wikidataRelation album= ', filtered)
+                    var WikiDataURL = filtered.url.resource;
+                    console.log('WikiDataURL album= ', WikiDataURL)
+                    const wikidataID = WikiDataURL.split('/').pop();
+                    const wikipediaURL = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks&ids=${wikidataID}&sitefilter=enwiki&origin=*`;
+                    fetch(wikipediaURL).then(response => response.json()).then(data => {
+                        console.log('wikipedia data: ', data)
+                        const entities = data.entities;
+                        const entity = entities[Object.keys(entities)[0]];
+                        const sitelinks = entity.sitelinks;
+                        const enwiki = sitelinks.enwiki;
+                        const title = enwiki.title;
+                        const wikipediaPageURL = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=${encodeURIComponent(title)}&origin=*`;
+                        const wikipediaPageURLdirect = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+                        //console.log('direct link ', wikipediaPageURLdirect);
+                        // document.querySelector('#wiki-album-page-link').href = wikipediaPageURLdirect;
+                        // const formattedBio = artistBioFull.replace(/\n/g, '<br>');
+                        console.log('wikipediaPageURLdirect: ', wikipediaPageURLdirect);
+                        document.getElementById("wiki-album-link").href = wikipediaPageURLdirect;
+                        return fetch(wikipediaPageURL);
+                    }).then(response => response.json()).then(data => {
+                        const pages = data.query.pages;
+                        const page = pages[Object.keys(pages)[0]];
+                        const extract = page.extract;
+                        //const truncatedExtract = extract;
+                        let truncatedExtract = extract.split(" ").slice(0, 105).join(" ") + "...";
+                        ////console.log(truncatedExtract);
+                        const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
+                        // const formattedExtract= extract;
+                        console.log('third wiki: ', formattedExtract);
+                        document.getElementById('wikipedia_album').innerHTML = formattedExtract;
+                        //href here wiki-album-link
+                    })
+                })
+            });;
+            // fetch artist images fromd deezer 
             // Fetch artist bio
             fetch(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodedArtist}&api_key=${apiKey}&format=json`).then(response => response.json()).then(data => {
                 let artistBio = data.artist.bio.summary;
@@ -218,7 +266,7 @@ function updateNowPlaying() {
                             const wikipediaURL = `https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=sitelinks&ids=${wikidataID}&sitefilter=enwiki&origin=*`;
                             // this removes all the entries from the relations array with an empty source-credit (i.e.: all aliases are removed)
                             let filteredRelations = data.relations.filter(relation => !relation['source-credit']);
-                            console.log('filteredRelations urls: ', filteredRelations);
+                            //console.log('filteredRelations urls: ', filteredRelations);
                             const urls = filteredRelations.filter(relation => ['last.fm', 'allmusic', 'discogs'].includes(relation.type)).map(relation => ({
                                 url: relation.url.resource
                                 , type: relation.type
