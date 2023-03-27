@@ -11,7 +11,7 @@ function updateNowPlaying() {
         let artist = track.artist['#text'];
         const song = track.name;
         let album = track.album['#text'];
-        const albumArtUrl = track.image[3]['#text'];
+        //const albumArtUrl = track.image[3]['#text'];
         const mbid = track.mbid;
         const album_mbid = track.album.mbid;
         const trackUrl = track.url
@@ -39,7 +39,7 @@ function updateNowPlaying() {
         document.querySelector('#album-info-wiki').textContent = `${album}`;
         //document.querySelector('#album-art').src = albumArtUrl;
         //coverart first from last.fm
-        document.querySelector('#last-album-art').src = albumArtUrl;
+        // document.querySelector('#last-album-art').src = albumArtUrl;
         // document.getElementById('mbid').textContent = `MBID: ${mbid}`;
         // document.getElementById('album_mbid').textContent = `MBID: ${album_mbid}`;
         const page_title = `https://www.albumoftheyear.org/search/?q=${encodeURIComponent(artist)}`;
@@ -131,12 +131,13 @@ function updateNowPlaying() {
             let truncatedAlbumDeezer = truncatedAlbum.split(" ").slice(0, 7).join(" ");
             //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
             console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer)
-            const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
-            console.log('deezerAlbumSearch', deezerAlbumSearch)
+                //const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
+            const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${encodedArtist}"`;
+            console.log('multisearch test: ', deezerAlbumSearch) //
             fetch(deezerAlbumSearch).then(response => response.json()).then(data => {
-                console.log('deezerAlbumSearch', data)
+                console.log('deezerAlbumSearch data', data)
                 console.log('deezerAlbumSearch', deezerAlbumSearch)
-                const albumImage = data.data[0].cover_xl;
+                const albumImage = data.data[0].album.cover_xl;
                 console.log(`album Image from deezer: ${albumImage}`);
                 document.querySelector('#mb-album-art').src = albumImage;
             });

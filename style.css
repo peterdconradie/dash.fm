@@ -1,18 +1,11 @@
-/* accent color = 46629c */
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body,
+html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
     font-family: 'Heebo', sans-serif;
     background-color: #1A1A1A;
-    /* background-image: url('back.jpeg');
-     */
-    background-size: cover;
-    background-position: center;
     overflow: hidden;
-    /* Hide scrollbars */
 }
 
 #background {
@@ -36,10 +29,28 @@ body {
 }
 
 #all_content {
+    height: 100%;
+}
+
+#centering {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#container {
+    display: flex;
     width: 90%;
-    height: 80%;
-    position: fixed;
-    overflow: scroll;
+}
+
+#cover-info {
+    width: 50%;
+    height: 50%;
+}
+
+#all_content {
+    height: 100%;
 }
 
 .content {
@@ -95,7 +106,7 @@ h2 {
 }
 
 h3 {
-    margin-top: 12px;
+    margin-top: 20px;
     font-size: 28px;
     margin-bottom: 10px;
     font-weight: 100;
@@ -162,27 +173,25 @@ a:active {
      */
 }
 
-#centering {
+#container {
     display: flex;
-    width: 100%;
-    justify-content: center;
+    width: 90%;
+    min-height: 84%;
 }
 
 #track_info_div {
-    float: right;
-    overflow: hidden;
-    width: 47%;
-    vertical-align: bottom;
+    overflow-y: auto;
+    max-width: 50%;
     margin-left: 20px;
-    overflow: auto;
-    /* here */
-    /* border-top: 1px solid #e5e5e5;
-     */
 }
 
-.cover-info {
-    position: relative;
-    width: 47%;
+#cover-info {
+    width: 50%;
+}
+
+#cover-info img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .fade {
@@ -193,31 +202,6 @@ a:active {
 
 .fade:hover {
     opacity: 1;
-}
-
-.lastfmcover,
-.mbcover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.lastfmcover img {
-    max-height: width: 100%;
-    max-height: 100%;
-}
-
-.mbcover {
-    z-index: 1;
-}
-
-#mb-album-art {
-    position: relative;
-    top: 0;
-    left: 0;
-    float: left;
-    width: 100%;
 }
 
 #last-album-art {
@@ -320,3 +304,6 @@ a:active {
 #fullscreen-icon {
     /* font-size: 14px;*/
 }
+
+
+/* font-size: 14px;*/
