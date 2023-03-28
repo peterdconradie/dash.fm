@@ -118,7 +118,9 @@ function updateNowPlaying() {
                 // document.querySelector('#mb-album-art').src = albumArtUrl;
                 //document.querySelector('#mb-album-art').src = 'images/transparent.png'
                 // https://cors-anywhere.herokuapp.com/
-            fetch(`https://api.deezer.com/search/artist?q=${encodeURIComponent(truncatedArtist)}`).then(response => response.json()).then(data => {
+            let deezerArtistURL = `https://api.deezer.com/search/artist?q=${truncatedArtist}`;
+            const proxy_url1 = 'https://corsproxy.io/?' + encodeURIComponent(deezerArtistURL);
+            fetch(proxy_url1).then(response => response.json()).then(data => {
                 // 2. Get the artist ID
                 const artistId = data.data[0].id;
                 const artistImage = data.data[0].picture_big;
@@ -130,17 +132,36 @@ function updateNowPlaying() {
             //var truncatedAlbumDeezer = truncatedAlbum.substring(0, 40);
             let truncatedAlbumDeezer = truncatedAlbum.split(" ").slice(0, 7).join(" ");
             //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
-            console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer)
-                //const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
-            const deezerAlbumSearch = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${encodedArtist}"`;
-            console.log('multisearch test: ', deezerAlbumSearch) //
-            fetch(deezerAlbumSearch).then(response => response.json()).then(data => {
-                console.log('deezerAlbumSearch data', data)
-                console.log('deezerAlbumSearch', deezerAlbumSearch)
-                const albumImage = data.data[0].album.cover_xl;
-                console.log(`album Image from deezer: ${albumImage}`);
+            console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer);
+            //const album_art_fetch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
+            // deezer if starts here
+            let deezerAlbumURL1 = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${truncatedArtist}"`;
+            let deezerAlbumURL2 = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}"`;
+            let deezerAlbumURL1prox = 'https://corsproxy.io/?' + encodeURIComponent(deezerAlbumURL1);
+            let deezerAlbumURL2prox = 'https://corsproxy.io/?' + encodeURIComponent(deezerAlbumURL2);
+            console.log('URL1 orig ', deezerAlbumURL1);
+            console.log('URL1 prox ', deezerAlbumURL1prox);
+            console.log('URL2 orig ', deezerAlbumURL2);
+            console.log('URL2 prox ', deezerAlbumURL2prox);
+            let album_art_fetch;
+            let albumImage;
+            fetch(deezerAlbumURL1prox).then(response => response.json()).then(data => {
+                let SearchResult = data.total;
+                if (SearchResult === 0) {
+                    album_art_fetch = deezerAlbumURL2prox;
+                }
+                else {
+                    album_art_fetch = deezerAlbumURL1prox;
+                }
+                return fetch(album_art_fetch);
+            }).then(response => response.json()).then(data => {
+                console.log('Fetch from deezer: ', data)
+                console.log('URL being used for deezer: ', album_art_fetch)
+                albumImage = data.data[0].album.cover_xl;
+                console.log('album art from deezer: ', albumImage)
                 document.querySelector('#mb-album-art').src = albumImage;
             });
+            /// deezer if ends here
             const mb_rg_url = `https://musicbrainz.org/ws/2/release-group/?query=artist:${encodedArtist} AND release:${truncatedAlbum} and title:${truncatedAlbum} &fmt=json`;
             //const mb_rg_url = `https://musicbrainz.org/ws/2/release/?query=artist:${encodedArtist} AND release:${truncatedAlbum}&fmt=json`;
             console.log(mb_rg_url);

@@ -10,7 +10,7 @@ It has three main views: album art with song details, artist bio with an option 
 * On some streaming platforms (i.e.: Tidal), collaborating artists get lumped together in a single artist tag (i.e.: see https://www.last.fm/music/Skrillex,+Missy+Elliott+&+Mr.+Oizo) when there are more than one performer on a track. This can cause issues when finding the correct info.
 * The link to Genius Lyrics might break, depending on the formatting of the song title and the punctuation it contains. Google search is usually faster anyway and will always work, but Genius tends to give more detail, so I've kept both. 
 * Some more obscure albums (mostly compilations) can be hard to find via the deezer api.
-* Accessing the deezer api results in a CORS error (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). For local testing in chrome (i.e.: localhost) you can use a plugin that will deal with this issue.  
+
 
 ## Screenshots
 ### Just the album
