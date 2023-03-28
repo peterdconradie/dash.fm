@@ -1,5 +1,5 @@
 # dash.fm: a now playing dashboard for last.fm
-This dashboard displays album art and information about the artist and track currently playing on last.fm for a particular use. It fetches data from the last.fm API. It can run without a server or easily be deployed to a site using https://www.w3schools.com/spaces/. 
+This dashboard displays album art and information about the artist and track currently playing on last.fm for a particular use. It fetches data from the last.fm, Wikipedia, Musicbrainz and Deezer APIs. It can run without a server or easily be deployed to a site using https://www.w3schools.com/spaces/ or netlify.com.
 
 ## Setup
 Setup involves obtaining a last.fm API key and inserting it into the key.js file. The dashboard can display your own or another user’s information by changing the URL: index.html?u=RJ, where RJ is the name of the user. 
@@ -9,8 +9,8 @@ It has three main views: album art with song details, artist bio with an option 
 ## Known Issues
 * On some streaming platforms (i.e.: Tidal), collaborating artists get lumped together in a single artist tag (i.e.: see https://www.last.fm/music/Skrillex,+Missy+Elliott+&+Mr.+Oizo) when there are more than one performer on a track. This can cause issues when finding the correct info.
 * The link to Genius Lyrics might break, depending on the formatting of the song title and the punctuation it contains. Google search is usually faster anyway and will always work, but Genius tends to give more detail, so I've kept both. 
-* Some more obscure albums (mostly compilations) can be hard to find via the deezer api. If there is a last.fm cover, it will be displayed by default. 
-* Deezer search api seems to only accept album titles. This poses problems for similarly titled albums, most notable "greatest hits" albums. 
+* Some more obscure albums (mostly compilations) can be hard to find via the deezer api.
+* Accessing the deezer api results in a CORS error (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors). For local testing in chrome (i.e.: localhost) you can use a plugin that will deal with this issue.  
 
 ## Screenshots
 ### Just the album

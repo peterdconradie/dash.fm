@@ -21,7 +21,7 @@ function updateNowPlaying() {
         const albumTrunc = album.split(' (')[0];
         const artistTrunc = artist.split(',')[0];
         //console.log('trackURLs info: ', trackUrl);
-        let truncatedTrackName = truncatedSong.slice(0, 49);
+        let truncatedTrackName = truncatedSong.slice(0, 60);
         if (truncatedSong.length > 49) {
             truncatedTrackName += '...';
         }
@@ -117,8 +117,8 @@ function updateNowPlaying() {
             document.querySelector('#mb-album-art').src = 'images/transparent.png'
                 // document.querySelector('#mb-album-art').src = albumArtUrl;
                 //document.querySelector('#mb-album-art').src = 'images/transparent.png'
-                // artist works 
-            fetch(`https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=${encodeURIComponent(truncatedArtist)}`).then(response => response.json()).then(data => {
+                // https://cors-anywhere.herokuapp.com/
+            fetch(`https://api.deezer.com/search/artist?q=${encodeURIComponent(truncatedArtist)}`).then(response => response.json()).then(data => {
                 // 2. Get the artist ID
                 const artistId = data.data[0].id;
                 const artistImage = data.data[0].picture_big;
@@ -132,7 +132,7 @@ function updateNowPlaying() {
             //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
             console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer)
                 //const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
-            const deezerAlbumSearch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${encodedArtist}"`;
+            const deezerAlbumSearch = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${encodedArtist}"`;
             console.log('multisearch test: ', deezerAlbumSearch) //
             fetch(deezerAlbumSearch).then(response => response.json()).then(data => {
                 console.log('deezerAlbumSearch data', data)
