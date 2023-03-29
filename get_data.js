@@ -114,11 +114,51 @@ function updateNowPlaying() {
             document.querySelector('#artist-lifespan').textContent = `No information found on musicbrainz`;
             document.querySelector('#artist-type').textContent = `No information found on musicbrainz`;
             document.querySelector('#release-date').textContent = `No date found`;
-            document.querySelector('#mb-album-art').src = 'images/transparent.png'
-                // document.querySelector('#mb-album-art').src = albumArtUrl;
-                //document.querySelector('#mb-album-art').src = 'images/transparent.png'
-                // https://cors-anywhere.herokuapp.com/
-            let deezerArtistURL = `https://api.deezer.com/search/artist?q=${truncatedArtist}`;
+            document.querySelector('#mb-album-art').src = 'images/transparent.png';
+            // truncate the album title for deezer 
+            let truncatedAlbumDeezer = truncatedAlbum.split(" ").slice(0, 7).join(" ");
+            //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
+            console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer);
+            /// function to latinize charachters for the cors proxy, more to be badded 
+            function replaceSpecialCharacters(str) {
+                const map = {
+                    'ä': 'a'
+                    , 'ë': 'e'
+                    , 'ï': 'i'
+                    , 'ö': 'o'
+                    , 'ü': 'u'
+                    , 'á': 'a'
+                    , 'é': 'e'
+                    , 'í': 'i'
+                    , 'ó': 'o'
+                    , 'ú': 'u'
+                    , 'à': 'a'
+                    , 'â': 'a'
+                    , 'è': 'e'
+                    , 'ì': 'i'
+                    , 'ò': 'o'
+                    , 'ù': 'u'
+                    , 'â': 'a'
+                    , 'ê': 'e'
+                    , 'î': 'i'
+                    , 'ô': 'o'
+                    , 'û': 'u'
+                    , 'ã': 'a'
+                    , "ø": "o"
+                    , "ū": "u"
+                    , "ç": "c"
+                    , "ñ": "n"
+                , };
+                return str.replace(/[áàââäãçéèêëíìîïñóòôöøúùûüū]/g, function (match) {
+                    return map[match];
+                });
+            }
+            latinArtist = replaceSpecialCharacters(truncatedArtist);
+            latinAlbum = replaceSpecialCharacters(truncatedAlbumDeezer);
+            console.log('fixed artist ', latinArtist); // "o i u"
+            console.log('fixed album ', latinAlbum); // "o i
+            ///
+            let deezerArtistURL = `https://api.deezer.com/search/artist?q=${latinArtist}`;
             const proxy_url1 = 'https://corsproxy.io/?' + encodeURIComponent(deezerArtistURL);
             fetch(proxy_url1).then(response => response.json()).then(data => {
                 // 2. Get the artist ID
@@ -130,13 +170,10 @@ function updateNowPlaying() {
             // end sanbox
             /// deezer sandbox here 
             //var truncatedAlbumDeezer = truncatedAlbum.substring(0, 40);
-            let truncatedAlbumDeezer = truncatedAlbum.split(" ").slice(0, 7).join(" ");
-            //const truncatedAlbumDeezer = truncatedAlbum.split(':')[0];
-            console.log('truncatedAlbum for deezer: ', truncatedAlbumDeezer);
             //const album_art_fetch = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/album?q=${truncatedAlbumDeezer}`;
             // deezer if starts here
-            let deezerAlbumURL1 = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}" artist:"${truncatedArtist}"`;
-            let deezerAlbumURL2 = `https://api.deezer.com/search?q=album:"${truncatedAlbumDeezer}"`;
+            let deezerAlbumURL1 = `https://api.deezer.com/search?q=album:"${latinAlbum}" artist:"${latinArtist}"`;
+            let deezerAlbumURL2 = `https://api.deezer.com/search?q=album:"${latinAlbum}"`;
             let deezerAlbumURL1prox = 'https://corsproxy.io/?' + encodeURIComponent(deezerAlbumURL1);
             let deezerAlbumURL2prox = 'https://corsproxy.io/?' + encodeURIComponent(deezerAlbumURL2);
             console.log('URL1 orig ', deezerAlbumURL1);
