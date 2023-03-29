@@ -21,7 +21,7 @@ function updateNowPlaying() {
         const albumTrunc = album.split(' (')[0];
         const artistTrunc = artist.split(',')[0];
         //console.log('trackURLs info: ', trackUrl);
-        let truncatedTrackName = truncatedSong.slice(0, 60);
+        let truncatedTrackName = truncatedSong.slice(0, 50);
         if (truncatedSong.length > 49) {
             truncatedTrackName += '...';
         }
@@ -107,7 +107,7 @@ function updateNowPlaying() {
         if (currentTrack !== lastPlayedTrack) {
             // trying populating with defaults here
             document.getElementById('wikipedia').innerHTML = '<p>No information found on wikipedia</p>';
-            document.getElementById('artist-bio').innerHTML = '<p>No information found on wikipedia</p>';
+            //document.getElementById('artist-bio').innerHTML = '<p>No information found on wikipedia</p>';
             document.getElementById('albums').innerHTML = '<p>No albums found in musicbrainz</p>';
             document.querySelector('#artist-from').textContent = `No information found on musicbrainz`;
             document.querySelector('#artist-area').textContent = `No information found on musicbrainz`;
@@ -215,11 +215,11 @@ function updateNowPlaying() {
                         const page = pages[Object.keys(pages)[0]];
                         const extract = page.extract;
                         //const truncatedExtract = extract;
-                        let truncatedExtract = extract.split(" ").slice(0, 105).join(" ") + "...";
+                        //let truncatedExtract = extract.split(" ").slice(0, 105).join(" ") + "...";
                         ////console.log(truncatedExtract);
                         const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
                         // const formattedExtract= extract;
-                        console.log('third wiki: ', formattedExtract);
+                        //console.log('third wiki: ', formattedExtract);
                         document.getElementById('wikipedia_album').innerHTML = formattedExtract;
                         //href here wiki-album-link
                     })
@@ -344,15 +344,15 @@ function updateNowPlaying() {
                             const pages = data.query.pages;
                             const page = pages[Object.keys(pages)[0]];
                             const extract = page.extract;
-                            //const truncatedExtract = extract;
+                            // this is to create a wikipedia extract but not currently used 
                             let truncatedExtract = extract.split(" ").slice(0, 105).join(" ") + "...";
                             ////console.log(truncatedExtract);
                             const formattedExtract = extract.replace(/<\/p><p>/g, "</p><br><p>");
                             // const formattedExtract= extract;
                             ////console.log('third wiki: ', formattedExtract);
                             document.getElementById('wikipedia').innerHTML = formattedExtract;
-                            //document.getElementById('wikipedia').innerHTML = formattedExtract;
-                            document.querySelector('#artist-bio').innerHTML = truncatedExtract;
+                            document.getElementById('wikipedia').innerHTML = formattedExtract;
+                            //document.querySelector('#artist-bio').innerHTML = truncatedExtract;
                         });
                         // until here
                     });

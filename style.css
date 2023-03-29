@@ -12,6 +12,23 @@ html {
 }
 
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.content {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+
 /* this is main */
 
 #all_content {
@@ -74,7 +91,7 @@ html {
 }
 
 #side-bar:hover {
-    width: 90%;
+    width: 95%;
 }
 
 #side-bar:hover .content {
