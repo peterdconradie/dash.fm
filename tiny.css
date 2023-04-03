@@ -1,32 +1,33 @@
-body,
-html {
-    height: 100%;
+body {
     font-family: 'Fira Sans', sans-serif;
     background-color: #1A1A1A;
     overflow: hidden;
-    align-items: left;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-/* this is main */
-
-#all_content {
+.center {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-}
-
-#cover-info {
-    float: left;
 }
 
 #lastcover {
     float: left;
-    padding-right: 10px;
+    width: 65%;
 }
 
 #lastcover img {
-    width: 290px;
+    min-width: 100%;
+}
+
+#lasttext {
+    float: left;
+    margin-left: 10px;
+    width: 33%;
 }
 
 p,
@@ -40,9 +41,7 @@ ul {
 }
 
 h1 {
-    font-size: 20px;
-    margin: 0px;
-    margin-bottom: 10px;
+    font-size: 7vw;
     font-weight: 400;
     /* border-top: 1px solid #46629c;
      */
@@ -53,15 +52,14 @@ div {
 }
 
 h2 {
-    font-size: 16px;
-    margin-bottom: 14px;
+    font-size: 5vw;
     margin-top: 0px;
     padding-top: 5px;
     font-weight: 200;
 }
 
 h3 {
-    font-size: 14px;
+    font-size: 3vw;
     margin-top: 8px;
     margin-bottom: 10px;
     font-weight: 100;

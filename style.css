@@ -11,6 +11,10 @@ html {
     align-items: center;
 }
 
+div {
+    /* border: 1px solid #ff0000; */
+}
+
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 
@@ -36,13 +40,12 @@ html {
 }
 
 #container {
-    width: 90%;
+    width: 98vw;
     margin: auto;
-    min-width: 90%;
 }
 
 #cover-info {
-    width: 49%;
+    width: 49vw;
     float: left;
 }
 
@@ -54,22 +57,21 @@ html {
     margin: 0px;
     padding: 0px;
     display: block;
+    /*  border: 1px solid #234323;*/
 }
 
 #mb-album-art {}
 
 #track_info_div {
-    width: 49%;
     float: right;
-    margin-left: 1%;
-    min-width: 49%;
+    width: 49%;
 }
 
 
 /* this is sidebar */
 
 #side-bar {
-    width: 20px;
+    width: 1vw;
     z-index: 9999;
     /* high value to ensure it's on top */
     position: fixed;
@@ -109,7 +111,7 @@ ul {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 4vw;
     margin: 0px;
     margin-bottom: 10px;
     font-weight: 400;
@@ -117,34 +119,30 @@ h1 {
      */
 }
 
-div {
-    /* border: 1px solid #ff0000; */
-}
-
 h2 {
-    margin-bottom: 5px;
+    margin-bottom: .8vw;
     margin-top: 0px;
-    font-size: 32px;
-    padding-top: 5px;
+    font-size: 3vw;
+    padding-top: .8vw;
     font-weight: 200;
 }
 
 h3 {
-    margin-top: 20px;
-    font-size: 28px;
+    margin-top: .8vw;
+    font-size: 2vw;
     margin-bottom: 10px;
     font-weight: 100;
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 1.5vw;
     font-weight: 400;
-    margin-top: 10px;
+    margin-top: .8vw;
     margin-bottom: 0px;
 }
 
 h5 {
-    font-size: 13px;
+    font-size: .8vw;
     margin-top: 10px;
     margin-right: 7px;
     margin-bottom: 20px;
@@ -157,7 +155,7 @@ p {
     margin-top: 0px;
     margin-bottom: 15px;
     line-height: 1.5em;
-    font-size: 14px;
+    font-size: 1vw;
     font-weight: 400;
     display: inline;
 }
@@ -189,21 +187,20 @@ a:active {
     float: right;
 }
 
-#track_info_div i.material-icons {
-    font-size: 12px;
+.lastfmlinks i.material-icons {
+    font-size: 1vw;
     padding-top: 0px;
     padding-bottom: 8px;
     /* border: 1px solid #46629c;
      */
 }
 
-.fade {
+.top-right {
     opacity: 0;
     transition: opacity 1s;
-    padding-bottom: 30px;
 }
 
-.fade:hover {
+.top-right:hover {
     opacity: 1;
 }
 
@@ -275,7 +272,7 @@ a:active {
     list-style-type: none;
     margin-left: 0;
     padding-left: 0;
-    font-size: 12px;
+    font-size: .8vw;
 }
 
 #extra-side li {
@@ -308,6 +305,14 @@ a:active {
 
 #fullscreen-icon {
     /* font-size: 14px;*/
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2vw;
+    height: 2vh;
 }
 
 

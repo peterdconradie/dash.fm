@@ -21,8 +21,8 @@ function updateNowPlaying() {
         const albumTrunc = album.split(' (')[0];
         const artistTrunc = artist.split(',')[0];
         //console.log('trackURLs info: ', trackUrl);
-        let truncatedTrackName = truncatedSong.slice(0, 50);
-        if (truncatedSong.length > 49) {
+        let truncatedTrackName = truncatedSong.slice(0, 95);
+        if (truncatedSong.length > 94) {
             truncatedTrackName += '...';
         }
         //console.log('getrecenttracks info: ', data);
@@ -50,8 +50,6 @@ function updateNowPlaying() {
         const lastAlbumUrl = `https://www.last.fm/search/albums?q=${encodeURIComponent(albumTrunc)}`;
         document.querySelector('#last_album_link').href = lastAlbumUrl;
         // Update the AlbumOfTheYear.org artist link
-        const aotyArtistUrl = `https://www.albumoftheyear.org/search/artists/?q=${encodeURIComponent(artistTrunc)}`;
-        document.querySelector('#aoty-link').href = aotyArtistUrl;
         // Update the AlbumOfTheYear.org album link
         const aotyAlbumUrl = `https://www.albumoftheyear.org/search/albums/?q=${encodeURIComponent(albumTrunc)}`;
         document.querySelector('#aoty-album-link').href = aotyAlbumUrl;
