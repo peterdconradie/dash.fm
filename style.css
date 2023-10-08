@@ -3,6 +3,7 @@ html {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    /*font-family: 'Helvetica Neue', sans-serif;*/
     font-family: 'Fira Sans', sans-serif;
     background-color: #1A1A1A;
     overflow: hidden;
@@ -113,31 +114,23 @@ ul {
 h1 {
     font-size: 4vw;
     margin: 0px;
-    margin-bottom: 10px;
     font-weight: 400;
-    /* border-top: 1px solid #46629c;
-     */
+    /*  border-top: 1px solid #e5e5e5; */
 }
 
 h2 {
-    margin-bottom: .8vw;
-    margin-top: 0px;
     font-size: 3vw;
-    padding-top: .8vw;
     font-weight: 200;
 }
 
 h3 {
-    margin-top: .8vw;
-    font-size: 2vw;
-    margin-bottom: 10px;
+    font-size: 2.5vw;
     font-weight: 100;
 }
 
 h4 {
     font-size: 1.5vw;
     font-weight: 400;
-    margin-top: .8vw;
     margin-bottom: 0px;
 }
 
